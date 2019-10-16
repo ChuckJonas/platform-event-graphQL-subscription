@@ -15,7 +15,7 @@ const typeDefs = gql`
     hello: String
   }
   type Subscription{
-      event(divideBy: Int): Event
+      event(divideBy: Int!): Event
       platformEvent: PlatformEvent
   }
   type Event{

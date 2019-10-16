@@ -3,7 +3,7 @@ import { ApolloServer, gql} from 'apollo-server-express'
 import {withFilter} from 'graphql-subscriptions';
 import fakeEvents from './fakeEvents'
 import {createServer} from 'http';
-import platformEvents from './platformEvents';
+// import platformEvents from './platformEvents';
 //NOTE: Leaving this example here since you could, in theory, expand graphql to do more for SF
 //Wanted to highligh that
  
@@ -16,7 +16,7 @@ const typeDefs = gql`
   }
   type Subscription{
       event(divideBy: Int): Event
-      platformEvent(): PlatformEvent
+      platformEvent: PlatformEvent
   }
   type Event{
       value: String
@@ -47,7 +47,7 @@ const resolvers = {
             resolve:(payload:any) => {
                 return {value: payload}
             },
-            subscribe: withFilter(platformEvents, (payload: number, args: any)=> {
+            subscribe: withFilter(fakeEvents, (payload: number, args: any)=> {
                 return true
             })
        }
